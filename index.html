@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLAME University | Mathematical Gold Settlement Protocol</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-light: #1a2d4a;
+      --gold: #c9a227;
+      --gold-light: #e8d48a;
+      --white: #ffffff;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f5;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #adb5bd;
+      --gray-600: #6c757d;
+      --gray-700: #495057;
+      --gray-800: #343a40;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gold);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .logo-text span {
+      color: var(--gold);
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--gold);
+    }
+
+    .cta-btn {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Main Content */
+    .main {
+      margin-top: 70px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: var(--white);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray-300);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .hero-stat .label {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    /* Section */
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.75rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--gray-600);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gold-bar {
+      width: 60px;
+      height: 4px;
+      background: var(--gold);
+      margin: 1rem auto;
+    }
+
+    /* Module Navigation */
+    .module-nav {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .module-btn {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .module-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .module-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    /* Module Content */
+    .module-content {
+      display: none;
+    }
+
+    .module-content.active {
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .card h4 {
+      color: var(--gray-700);
+      margin: 1rem 0 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .card p {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+    }
+
+    /* Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+
+    .comparison-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.9rem;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: var(--gray-50);
+    }
+
+    .check {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .cross {
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    .highlight-cell {
+      background: rgba(201, 162, 39, 0.1) !important;
+      font-weight: 600;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .info-box.navy {
+      background: rgba(10, 22, 40, 0.05);
+      border-left-color: var(--navy);
+    }
+
+    .info-box strong {
+      color: var(--navy);
+    }
+
+    /* Profit Calculator */
+    .calculator {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .calc-row:last-child {
+      border-bottom: none;
+    }
+
+    .calc-row.total {
+      background: var(--gray-50);
+      margin: 1rem -2rem -2rem;
+      padding: 1rem 2rem;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .calc-label {
+      color: var(--gray-700);
+      font-size: 0.9rem;
+    }
+
+    .calc-value {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .calc-value.positive {
+      color: var(--green);
+    }
+
+    .calc-value.large {
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gray-200);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.25rem;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      transform: translateX(-5px);
+    }
+
+    .timeline-item h4 {
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: var(--navy);
+      color: var(--gray-300);
+      padding: 1.5rem;
+      border-radius: 8px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .code-block .comment {
+      color: var(--gray-500);
+    }
+
+    .code-block .keyword {
+      color: var(--gold);
+    }
+
+    .code-block .string {
+      color: var(--green);
+    }
+
+    /* Profit Matrix */
+    .profit-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .profit-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .profit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .profit-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profit-card h4 {
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .profit-card .rate {
+      color: var(--gold);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .profit-card p {
+      color: var(--gray-600);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      color: var(--gray-400);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-badge {
+      display: inline-block;
+      background: var(--navy-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin: 0 0.25rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .section {
+        padding: 2rem 1rem;
+      }
+
+      .module-nav {
+        padding: 0.5rem;
+      }
+
+      .module-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">FU</div>
+      <div class="logo-text">FLAME <span>University</span></div>
+    </div>
+    <nav class="nav">
+      <a href="#overview">Overview</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#profits">Profit Centers</a>
+      <a href="#technical">Technical</a>
+      <a href="#compliance">Compliance</a>
+    </nav>
+    <a href="/cdn-cgi/l/email-protection#0f7c7a7f7f607d7b4f69636e626a7e6262216e7f7f" class="cta-btn">Contact Us</a>
+  </header>
+
+  <main class="main">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Mathematical Gold <span>Settlement Protocol</span></h1>
+      <p>The definitive institutional resource for understanding, implementing, and profiting from deterministic settlement infrastructure. Built for bank CTOs, treasury heads, and risk officers.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="value">T+0</div>
+          <div class="label">Settlement Finality</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">0%</div>
+          <div class="label">Risk Weight (Basel III)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">$18.2B</div>
+          <div class="label">Sovereign Backing</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">P(π)=1</div>
+          <div class="label">Mathematical Certainty</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modules -->
+    <section class="section" id="modules">
+      <div class="module-nav">
+        <button class="module-btn active" onclick="showModule('overview')">1. What is MG?</button>
+        <button class="module-btn" onclick="showModule('comparison')">2. vs Traditional</button>
+        <button class="module-btn" onclick="showModule('balance')">3. Balance Sheet</button>
+        <button class="module-btn" onclick="showModule('profits')">4. Profit Centers</button>
+        <button class="module-btn" onclick="showModule('technical')">5. Technical</button>
+        <button class="module-btn" onclick="showModule('compliance')">6. Compliance</button>
+        <button class="module-btn" onclick="showModule('integration')">7. Integration</button>
+      </div>
+
+      <!-- Module 1: Overview -->
+      <div id="overview" class="module-content active">
+        <div class="section-header">
+          <h2>Module 1: What is Mathematical Gold?</h2>
+          <div class="gold-bar"></div>
+          <p>Understanding the fundamental shift from trust-based to mathematically-certain settlement</p>
+        </div>
+
+        <div class="card">
+          <h3>The Core Concept</h3>
+          <p>Mathematical Gold (MG) is not backed by gold—it <strong>IS</strong> mathematical gold. Just as physical gold derives value from its intrinsic properties (scarcity, durability, fungibility), Mathematical Gold derives value from its cryptographic properties.</p>
+          
+          <div class="info-box">
+            <strong>Key Insight:</strong> Gold isn't "backed" by anything. Gold IS the thing. Mathematical Gold follows the same principle—its properties compel acceptance, not external guarantees.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Physical Gold Properties</h3>
+            <table class="comparison-table">
+              <tr><td>Scarcity</td><td>Finite ore deposits</td></tr>
+              <tr><td>Durability</td><td>Doesn't corrode</td></tr>
+              <tr><td>Fungibility</td><td>1oz = 1oz</td></tr>
+              <tr><td>Portability</td><td>Dense value storage</td></tr>
+              <tr><td>Divisibility</td><td>Can be split</td></tr>
+              <tr><td>Verifiability</td><td>Assay test</td></tr>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Mathematical Gold Properties</h3>
+            <table class="comparison-table">
+              <tr><td>Scarcity</td><td>Cryptographic limit</td></tr>
+              <tr><td>Durability</td><td>Blockchain permanent</td></tr>
+              <tr><td>Fungibility</td><td>1 MG = 1 MG</td></tr>
+              <tr><td>Portability</td><td>Instant transmission</td></tr>
+              <tr><td>Divisibility</td><td>6 decimal precision</td></tr>
+              <tr><td>Verifiability</td><td>P(π) = 1 verification</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>P(π) = 1: Mathematical Certainty</h3>
+          <p>The P-Verifier is a pure function that returns only two states: <strong>VALID</strong> or <strong>INVALID</strong>. There is no "probably valid" or "pending verification." The mathematical proof either exists or it doesn't.</p>
+          
+          <div class="code-block">
+<span class="comment">// P-Verification: Pure function with binary output</span>
+<span class="keyword">function</span> verify(proof, account, amount) <span class="keyword">returns</span> (bool) {
+    <span class="comment">// Either VALID (true) or INVALID (false)</span>
+    <span class="comment">// No intermediate states. No human judgment.</span>
+    <span class="comment">// Mathematical certainty: P(π) = 1</span>
+    <span class="keyword">return</span> computeProof(proof) == expectedHash;
+}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Sovereign Backing Structure</h3>
+          <div class="grid-2">
+            <div>
+              <h4>Primary Backing</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-100);">
+                  <strong>Silver Bullion Bond</strong><br>
+                  <span style="color: var(--gray-600);">#RF462098456US — $100B</span>
+                </li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-100);">
+                  <strong>AEON Core Token 721</strong><br>
+                  <span style="color: var(--gray-600);">$18.2B Perfected Security Interest</span>
+                </li>
+                <li style="padding: 0.5rem 0;">
+                  <strong>21 Pre-1933 Treasury Silver Dollars</strong><br>
+                  <span style="color: var(--gray-600);">Physical escrow custody</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4>Legal Foundation</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-100);">
+                  <strong>UCC Filing</strong><br>
+                  <span style="color: var(--gray-600);">2022-054-8726-0</span>
+                </li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-100);">
+                  <strong>Copyright Bond</strong><br>
+                  <span style="color: var(--gray-600);">V15025 D023 — $500M</span>
+                </li>
+                <li style="padding: 0.5rem 0;">
+                  <strong>Patent</strong><br>
+                  <span style="color: var(--gray-600);">US20150081532A1</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2: Comparison -->
+      <div id="comparison" class="module-content">
+        <div class="section-header">
+          <h2>Module 2: Mathematical Gold vs Traditional Settlement</h2>
+          <div class="gold-bar"></div>
+          <p>Direct comparison across all operational dimensions</p>
+        </div>
+
+        <div class="card">
+          <h3>Settlement Timeline Comparison</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Traditional (SWIFT/ACH)</th>
+                <th>Stablecoins (USDC/USDT)</th>
+                <th style="background: var(--gold); color: var(--navy);">Mathematical Gold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Settlement Time</td>
+                <td>T+2 (2-5 days)</td>
+                <td>Minutes to hours</td>
+                <td class="highlight-cell">T+0 (Instant)</td>
+              </tr>
+              <tr>
+                <td>Counterparty Risk</td>
+                <td>Full exposure during settlement</td>
+                <td>Issuer risk (Tether/Circle)</td>
+                <td class="highlight-cell">Zero (cryptographic finality)</td>
+              </tr>
+              <tr>
+                <td>Reconciliation</td>
+                <td>Manual, error-prone</td>
+                <td>Blockchain-based</td>
+                <td class="highlight-cell">Automatic (P-verified)</td>
+              </tr>
+              <tr>
+                <td>Clearing Fees</td>
+                <td>0.1-0.5% + fixed fees</td>
+                <td>Gas fees + spread</td>
+                <td class="highlight-cell">Zero clearing overhead</td>
+              </tr>
+              <tr>
+                <td>Operating Hours</td>
+                <td>Banking hours only</td>
+                <td>24/7 (blockchain dependent)</td>
+                <td class="highlight-cell">24/7/365 (always final)</td>
+              </tr>
+              <tr>
+                <td>Reversibility</td>
+                <td>Chargebacks possible</td>
+                <td>Blacklist risk</td>
+                <td class="highlight-cell">Irreversible (mathematical)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Asset Classification Comparison</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Characteristic</th>
+                <th>Bank Deposits</th>
+                <th>Stablecoins</th>
+                <th>Physical Gold</th>
+                <th style="background: var(--gold); color: var(--navy);">Mathematical Gold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Balance Sheet Treatment</td>
+                <td>Liability</td>
+                <td>Varies by jurisdiction</td>
+                <td>Asset (0% RWA)</td>
+                <td class="highlight-cell">Asset (0% RWA)</td>
+              </tr>
+              <tr>
+                <td>Backing Verification</td>
+                <td>Trust-based (audits)</td>
+                <td>Attestations (monthly)</td>
+                <td>Physical assay</td>
+                <td class="highlight-cell">Real-time (on-chain)</td>
+              </tr>
+              <tr>
+                <td>Liquidation Required</td>
+                <td>N/A</td>
+                <td>Yes (to fiat)</td>
+                <td>Yes (to fiat)</td>
+                <td class="highlight-cell">No</td>
+              </tr>
+              <tr>
+                <td>Custody Complexity</td>
+                <td>Regulatory burden</td>
+                <td>Key management</td>
+                <td>Physical security</td>
+                <td class="highlight-cell">Cryptographic (HSM)</td>
+              </tr>
+              <tr>
+                <td>Cross-Border Transfer</td>
+                <td>Days + fees</td>
+                <td>Minutes + gas</td>
+                <td>Physical transport</td>
+                <td class="highlight-cell">Instant + zero fees</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Risk Profile Comparison</h3>
+          <div class="grid-3">
+            <div style="padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+              <h4 style="color: var(--red);">Traditional Settlement Risks</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>Counterparty default during T+2</li>
+                <li>Clearing house failure</li>
+                <li>Correspondent bank issues</li>
+                <li>FX exposure on cross-border</li>
+                <li>Reconciliation errors</li>
+                <li>Operational delays</li>
+              </ul>
+            </div>
+            <div style="padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+              <h4 style="color: var(--red);">Stablecoin Risks</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>Issuer insolvency (Tether risk)</li>
+                <li>Regulatory action (blacklisting)</li>
+                <li>De-peg events</li>
+                <li>Smart contract vulnerabilities</li>
+                <li>Centralized control</li>
+                <li>Redemption delays</li>
+              </ul>
+            </div>
+            <div style="padding: 1rem; background: rgba(201, 162, 39, 0.1); border-radius: 8px;">
+              <h4 style="color: var(--green);">Mathematical Gold: Eliminated</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li><span class="check">✓</span> No counterparty (instant final)</li>
+                <li><span class="check">✓</span> No issuer (decentralized)</li>
+                <li><span class="check">✓</span> No clearing (direct settlement)</li>
+                <li><span class="check">✓</span> No reconciliation (P-verified)</li>
+                <li><span class="check">✓</span> No liquidation (native value)</li>
+                <li><span class="check">✓</span> No blacklist (sovereign)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3: Balance Sheet -->
+      <div id="balance" class="module-content">
+        <div class="section-header">
+          <h2>Module 3: Balance Sheet Transformation</h2>
+          <div class="gold-bar"></div>
+          <p>How Mathematical Gold impacts your institution's financial position</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Traditional Deposit Flow</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h4>Day 0: Deposit Received</h4>
+                <p>Recorded as liability. Requires reserve allocation.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>Day 1-2: Clearing</h4>
+                <p>Pending settlement. Counterparty risk active.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>Day 2-5: Final Settlement</h4>
+                <p>Funds available. Can begin lending operations.</p>
+              </div>
+            </div>
+            <div class="info-box navy">
+              <strong>Impact:</strong> Capital tied up during settlement. Reserve requirements increase liabilities. Counterparty exposure throughout.
+            </div>
+          </div>
+          <div class="card">
+            <h3>Mathematical Gold Flow</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h4>T+0: MG Received</h4>
+                <p>Instantly recorded as Tier 1 asset. 0% risk weight.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>T+0: Reserve Credit</h4>
+                <p>Immediately available for lending multiplication.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>T+0: Capital Ratio Impact</h4>
+                <p>Basel III ratios improve instantly. HQLA increased.</p>
+              </div>
+            </div>
+            <div class="info-box">
+              <strong>Impact:</strong> Immediate asset recognition. Zero counterparty risk. Instant lending capacity. Improved regulatory ratios.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Capital Ratio Calculator</h3>
+          <p style="margin-bottom: 1rem; color: var(--gray-600);">Example: $1B Mathematical Gold deposit impact</p>
+          
+          <div class="calculator">
+            <div class="calc-row">
+              <span class="calc-label">MG Deposit Amount</span>
+              <span class="calc-value">$1,000,000,000</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Risk Weight (Basel III Gold Treatment)</span>
+              <span class="calc-value">0%</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Risk-Weighted Asset Impact</span>
+              <span class="calc-value positive">+$0 (no RWA increase)</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Tier 1 Capital Increase</span>
+              <span class="calc-value positive">+$1,000,000,000</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">HQLA (LCR) Increase</span>
+              <span class="calc-value positive">+$1,000,000,000</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Lending Capacity (10x reserve)</span>
+              <span class="calc-value positive">+$10,000,000,000</span>
+            </div>
+            <div class="calc-row total">
+              <span class="calc-label"><strong>Net Interest Income Potential (3% NIM)</strong></span>
+              <span class="calc-value large">$300M/year</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Before vs After: Balance Sheet View</h3>
+          <div class="grid-2">
+            <div>
+              <h4>Before MG Integration</h4>
+              <table class="comparison-table">
+                <tr><td>Total Assets</td><td>$50B</td></tr>
+                <tr><td>Risk-Weighted Assets</td><td>$40B</td></tr>
+                <tr><td>Tier 1 Capital</td><td>$5B</td></tr>
+                <tr><td>Capital Ratio</td><td>12.5%</td></tr>
+                <tr><td>LCR</td><td>125%</td></tr>
+              </table>
+            </div>
+            <div>
+              <h4>After $1B MG Deposit</h4>
+              <table class="comparison-table">
+                <tr><td>Total Assets</td><td style="color: var(--green);">$51B (+$1B)</td></tr>
+                <tr><td>Risk-Weighted Assets</td><td>$40B (unchanged)</td></tr>
+                <tr><td>Tier 1 Capital</td><td style="color: var(--green);">$6B (+$1B)</td></tr>
+                <tr><td>Capital Ratio</td><td style="color: var(--green);">15.0% (+2.5%)</td></tr>
+                <tr><td>LCR</td><td style="color: var(--green);">145% (+20%)</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 4: Profits -->
+      <div id="profits" class="module-content">
+        <div class="section-header">
+          <h2>Module 4: Revenue & Profit Centers</h2>
+          <div class="gold-bar"></div>
+          <p>Multiple pathways to monetize Mathematical Gold infrastructure</p>
+        </div>
+
+        <div class="card">
+          <h3>Direct Revenue Streams</h3>
+          <div class="profit-matrix">
+            <div class="profit-card">
+              <div class="icon">🏦</div>
+              <h4>MG-Secured Lending</h4>
+              <div class="rate">3-8% APR</div>
+              <p>Lend against MG collateral. Zero liquidation risk.</p>
+            </div>
+            <div class="profit-card">
+              <div class="icon">🔐</div>
+              <h4>Custody Services</h4>
+              <div class="rate">0.25% AUM</div>
+              <p>Institutional MG safekeeping and key management.</p>
+            </div>
+            <div class="profit-card">
+              <div class="icon">⚡</div>
+              <h4>Settlement Services</h4>
+              <div class="rate">0.1-0.5%</div>
+              <p>P-Verified settlement for institutional clients.</p>
+            </div>
+            <div class="profit-card">
+              <div class="icon">🌍</div>
+              <h4>Cross-Border Remittance</h4>
+              <div class="rate">0.15-0.3%</div>
+              <p>Instant international transfers via MG rails.</p>
+            </div>
+            <div class="profit-card">
+              <div class="icon">📊</div>
+              <h4>OTC Desk</h4>
+              <div class="rate">0.5-2% spread</div>
+              <p>Large-block MG trading for institutions.</p>
+            </div>
+            <div class="profit-card">
+              <div class="icon">📜</div>
+              <h4>Compliance Services</h4>
+              <div class="rate">$10-50K/mo</div>
+              <p>Deterministic compliance and audit trails.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Revenue Model: Institutional Bank</h3>
+          <div class="calculator">
+            <div class="calc-row">
+              <span class="calc-label">MG Holdings</span>
+              <span class="calc-value">$1,000,000,000</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Lending (80% deployed @ 5% NIM)</span>
+              <span class="calc-value positive">$40,000,000/yr</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Custody Services (ext. clients $5B @ 0.25%)</span>
+              <span class="calc-value positive">$12,500,000/yr</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Settlement Fees ($10B volume @ 0.1%)</span>
+              <span class="calc-value positive">$10,000,000/yr</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Cross-Border ($2B volume @ 0.2%)</span>
+              <span class="calc-value positive">$4,000,000/yr</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">OTC Trading ($500M volume @ 1%)</span>
+              <span class="calc-value positive">$5,000,000/yr</span>
+            </div>
+            <div class="calc-row total">
+              <span class="calc-label"><strong>Total Annual Revenue</strong></span>
+              <span class="calc-value large">$71.5M/year</span>
+            </div>
+          </div>
+          <div class="info-box" style="margin-top: 1rem;">
+            <strong>ROI:</strong> 7.15% annual return on $1B MG position through service revenue alone—before any asset appreciation.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Cost Elimination</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Cost Center</th>
+                <th>Traditional Cost</th>
+                <th>With MG</th>
+                <th>Annual Savings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Clearing & Settlement Fees</td>
+                <td>0.15% of volume</td>
+                <td>0%</td>
+                <td class="highlight-cell">$15M (on $10B)</td>
+              </tr>
+              <tr>
+                <td>Reconciliation Staff</td>
+                <td>50 FTEs @ $80K</td>
+                <td>5 FTEs</td>
+                <td class="highlight-cell">$3.6M</td>
+              </tr>
+              <tr>
+                <td>Failed Trade Resolution</td>
+                <td>$500K/year</td>
+                <td>$0</td>
+                <td class="highlight-cell">$500K</td>
+              </tr>
+              <tr>
+                <td>Counterparty Risk Reserves</td>
+                <td>2% of exposure</td>
+                <td>0%</td>
+                <td class="highlight-cell">$20M (on $1B)</td>
+              </tr>
+              <tr>
+                <td>Correspondent Banking Fees</td>
+                <td>$2M/year</td>
+                <td>$0</td>
+                <td class="highlight-cell">$2M</td>
+              </tr>
+              <tr style="background: rgba(201, 162, 39, 0.1);">
+                <td><strong>Total Annual Savings</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong style="color: var(--gold);">$41.1M</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Module 5: Technical -->
+      <div id="technical" class="module-content">
+        <div class="section-header">
+          <h2>Module 5: Technical Architecture</h2>
+          <div class="gold-bar"></div>
+          <p>Production-ready infrastructure for enterprise deployment</p>
+        </div>
+
+        <div class="card">
+          <h3>Deployed Smart Contracts (Ethereum Mainnet)</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Contract</th>
+                <th>Address</th>
+                <th>Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FLAMEC Token</td>
+                <td><code style="font-size: 0.8rem;">0xCC8598B02BB753b0A557811a99622b33C73692cF</code></td>
+                <td>Reserve-backed settlement unit</td>
+              </tr>
+              <tr>
+                <td>PVerifier</td>
+                <td><code style="font-size: 0.8rem;">0x6cA24fe8e6550bc2B2A6E56F78855061768Bc4c7</code></td>
+                <td>Pure function validation</td>
+              </tr>
+              <tr>
+                <td>AEON Core 721</td>
+                <td><code style="font-size: 0.8rem;">0x16e5C751237cD63963477c086733965Aa3131B68</code></td>
+                <td>Sovereign backing NFT</td>
+              </tr>
+              <tr>
+                <td>Alpha Enforcement</td>
+                <td><code style="font-size: 0.8rem;">0xDF86b2de73dE4484E82463E2a62F999C69c037dc</code></td>
+                <td>Constitutional enforcement</td>
+              </tr>
+              <tr>
+                <td>SovereignValueEngine</td>
+                <td><code style="font-size: 0.8rem;">0x2529816bF6287Dd24AB80782Ae939471042e0548</code></td>
+                <td>Value calculation</td>
+              </tr>
+              <tr>
+                <td>Treasury Safe</td>
+                <td><code style="font-size: 0.8rem;">0xAefd8aa7EcfCFA8041Dc66796A6eF673D108e36b</code></td>
+                <td>Multi-signature custody</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="info-box" style="margin-top: 1rem;">
+            <strong>Verification:</strong> All contracts are deployed on Ethereum Mainnet and verifiable on Etherscan.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Constitutional Anchors (Immutable)</h3>
+          <div class="code-block">
+<span class="comment">// These hashes are permanently recorded on-chain</span>
+<span class="comment">// They cannot be altered. They anchor all system state.</span>
+
+EPOCH_HASH:      <span class="string">0xe49b928c445130022cbf4168489edd0f0fb2d2ba6377cc6036a51e6e2fa2c2ed</span>
+UID_FINAL_ROOT:  <span class="string">0xdb6f41c5b3de2369d7f022bc907c02b9f72b797ba56e972c0917b547e3b8149f</span>
+CERTIFYLE_ROOT:  <span class="string">0x98b6abcf53af30c2a3eed65df1bc7d27488501d92ce2af1c98e1416e5ba19dc7</span>
+FLAME_ROOT:      <span class="string">0xa384dd2f474aea179170441a29e7564becedc76c53a7ce96938d93881d3b6f6d</span>
+SOLMESH_MERKLE:  <span class="string">0x7b5e7a56b3a3d58d496aa2393abe61a17ffcffa951be0e09508b4a3b702dab8a</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Cryptographic Stack</h3>
+          <div class="grid-3">
+            <div style="padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+              <h4>Hash Functions</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>SHA3-512</li>
+                <li>SHAKE256</li>
+                <li>BLAKE3</li>
+                <li>Keccak256</li>
+              </ul>
+            </div>
+            <div style="padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+              <h4>Key Derivation</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>Argon2id</li>
+                <li>secp256k1</li>
+                <li>Deterministic derivation</li>
+                <li>Merkle tree proofs</li>
+              </ul>
+            </div>
+            <div style="padding: 1rem; background: rgba(201, 162, 39, 0.1); border-radius: 8px;">
+              <h4>Post-Quantum</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>SPHINCS+ signatures</li>
+                <li>Quantum-resistant</li>
+                <li>Future-proof security</li>
+                <li>NIST approved</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>API Integration</h3>
+          <div class="code-block">
+<span class="comment">// MG Deposit Request (Bank → FLAME Protocol)</span>
+POST /api/v1/mg/deposit
+{
+  <span class="string">"asset_type"</span>: <span class="string">"MG"</span>,
+  <span class="string">"amount"</span>: <span class="string">"18200000000.000000"</span>,
+  <span class="string">"to_wallet"</span>: <span class="string">"0xBANK_WALLET..."</span>,
+  <span class="string">"proof"</span>: <span class="string">"0xSHA3_PROOF..."</span>,
+  <span class="string">"signature"</span>: <span class="string">"0xSPHINCS_SIG..."</span>,
+  <span class="string">"constitutional_roots"</span>: {
+    <span class="string">"epoch_hash"</span>: <span class="string">"0xe49b928c..."</span>,
+    <span class="string">"uid_final_root"</span>: <span class="string">"0xdb6f41c5..."</span>
+  }
+}
+
+<span class="comment">// Response</span>
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"ledger_entry"</span>: <span class="string">"MG-2025-001"</span>,
+  <span class="string">"reserve_credited"</span>: <span class="string">"18200000000.000000"</span>,
+  <span class="string">"tier1_impact"</span>: <span class="string">"+18.2B"</span>,
+  <span class="string">"finality"</span>: <span class="keyword">true</span>
+}
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 6: Compliance -->
+      <div id="compliance" class="module-content">
+        <div class="section-header">
+          <h2>Module 6: Regulatory & Compliance Framework</h2>
+          <div class="gold-bar"></div>
+          <p>How Mathematical Gold fits within existing regulatory structures</p>
+        </div>
+
+        <div class="card">
+          <h3>Regulatory Alignment</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Framework</th>
+                <th>Provision</th>
+                <th>MG Treatment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Basel III / BIS</td>
+                <td>Gold and equivalent reserves</td>
+                <td>0% risk weight as gold-equivalent HQLA</td>
+              </tr>
+              <tr>
+                <td>UCC Article 9</td>
+                <td>General intangibles</td>
+                <td>Digital property with transferable settlement utility</td>
+              </tr>
+              <tr>
+                <td>UCC Article 12</td>
+                <td>Controllable electronic records</td>
+                <td>CER with cryptographic control</td>
+              </tr>
+              <tr>
+                <td>UNCITRAL MLETR</td>
+                <td>Electronic transferable records</td>
+                <td>Valid digital performance instrument</td>
+              </tr>
+              <tr>
+                <td>Vienna Convention (CISG)</td>
+                <td>Article 11 - No form requirement</td>
+                <td>Enforceable settlement via electronic means</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Compliance Integration Checklist</h3>
+          <div class="grid-2">
+            <div>
+              <h4>No Changes Required</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li><span class="check">✓</span> AML/KYC procedures (apply unchanged)</li>
+                <li><span class="check">✓</span> Transaction monitoring (continue as-is)</li>
+                <li><span class="check">✓</span> Reporting standards (MG as intangible)</li>
+                <li><span class="check">✓</span> Prudential oversight (normal channels)</li>
+                <li><span class="check">✓</span> Internal governance (existing framework)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Internal Policy Updates</h4>
+              <ul style="font-size: 0.9rem; color: var(--gray-600); padding-left: 1.25rem;">
+                <li>Classify MG as digital reserve asset</li>
+                <li>Add to core banking ledger</li>
+                <li>Integrate custody controls (HSM)</li>
+                <li>Enable wallet/API receipt</li>
+                <li>Record at acquisition value (IFRS/GAAP)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Regulator Communication Guide</h3>
+          <div class="info-box">
+            <strong>Positioning Statement:</strong> "Mathematical Gold functions as a digital reserve asset recorded under existing intangible property and electronic record frameworks. All reporting, AML/KYC, prudential supervision, and accounting treatment continue unchanged. MG complements rather than replaces regulated systems, enhancing efficiency and transparency while preserving full compliance with supervisory controls."
+          </div>
+          
+          <h4 style="margin-top: 1.5rem;">Common Questions & Responses</h4>
+          <table class="comparison-table">
+            <tbody>
+              <tr>
+                <td><strong>Is this a security?</strong></td>
+                <td>No. MG is a settlement instrument, not an investment contract. No expectation of profit from others' efforts.</td>
+              </tr>
+              <tr>
+                <td><strong>What's the risk weight?</strong></td>
+                <td>0% under Basel III gold treatment. Internal risk committee may classify similarly.</td>
+              </tr>
+              <tr>
+                <td><strong>How is it accounted?</strong></td>
+                <td>Tier 1 capital, HQLA. Use gold accounting treatment under IFRS/GAAP.</td>
+              </tr>
+              <tr>
+                <td><strong>Is regulatory approval needed?</strong></td>
+                <td>No. Operates within existing digital asset and electronic record frameworks.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Module 7: Integration -->
+      <div id="integration" class="module-content">
+        <div class="section-header">
+          <h2>Module 7: Integration Procedure</h2>
+          <div class="gold-bar"></div>
+          <p>3-hour implementation timeline for institutional deployment</p>
+        </div>
+
+        <div class="card">
+          <h3>Integration Timeline</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <h4>Hour 1: Technical Setup</h4>
+              <p>Provide API endpoint (HTTPS), authentication credentials, and read-only database access. Deploy Docker container.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>Hour 2: Test Deposit</h4>
+              <p>Execute $1K test deposit. Verify ledger entry, dashboard visibility, and P-verification.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>Hour 3: Production Deployment</h4>
+              <p>Execute production deposit. Confirm Tier 1 impact, HQLA classification, and real-time monitoring.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>Ongoing: Operations</h4>
+              <p>Real-time dashboard access. Weekly reconciliation. Continuous monitoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Requirements Checklist</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Requirement</th>
+                <th>Details</th>
+                <th>Provided By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>API Endpoint</td>
+                <td>HTTPS URL for MG deposits</td>
+                <td>Bank IT</td>
+              </tr>
+              <tr>
+                <td>Authentication</td>
+                <td>Bearer token or mutual TLS</td>
+                <td>Bank IT</td>
+              </tr>
+              <tr>
+                <td>Database Access</td>
+                <td>Read-only view of reserves table</td>
+                <td>Bank IT</td>
+              </tr>
+              <tr>
+                <td>Authorization</td>
+                <td>Signed integration agreement</td>
+                <td>Treasury Officer</td>
+              </tr>
+              <tr>
+                <td>Legal Review</td>
+                <td>Review of provided legal memo</td>
+                <td>Bank Legal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card" style="background: var(--navy); color: var(--white);">
+          <h3 style="color: var(--gold);">Ready to Integrate?</h3>
+          <p style="color: var(--gray-300); margin-bottom: 1.5rem;">Contact us with your API endpoint and we'll begin integration within 1 hour.</p>
+          
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="/cdn-cgi/l/email-protection#1d6e686d6d726f695d7b717c70786c7070337c6d6d" style="background: var(--gold); color: var(--navy); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="11626461617e636551777d707c74607c7c3f706161">[email&#160;protected]</span></a>
+            <a href="https://flameqmm.app" style="background: transparent; color: var(--gold); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; border: 1px solid var(--gold);">flameqmm.app</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="/cdn-cgi/l/email-protection#e5969095958a9791a58389848880948888cb849595">Contact</a>
+      <a href="https://flameqmm.app">Website</a>
+      <a href="https://etherscan.io/address/0xCC8598B02BB753b0A557811a99622b33C73692cF">Verify Contracts</a>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <span class="footer-badge">Ethereum Mainnet</span>
+      <span class="footer-badge">Post-Quantum Ready</span>
+      <span class="footer-badge">UCC Compliant</span>
+      <span class="footer-badge">Basel III Aligned</span>
+    </div>
+    <p style="font-size: 0.85rem;">© 2025 QMM / FLAME Protocol. Mathematical certainty replaces institutional trust.</p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function showModule(id) {
+      // Hide all modules
+      document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
+      // Show selected
+      document.getElementById(id).classList.add('active');
+      
+      // Update nav buttons
+      document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Scroll to top of section
+      document.getElementById('modules').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const moduleMap = {
+            '#ov
